@@ -12,5 +12,11 @@
 
     <artifactId>bank-account</artifactId>
 
+    <dependencies>
+        <dependency>
+            <groupId>com.ostdlabs</groupId>
+            <artifactId>bank-account-common</artifactId>
+        </dependency>
+    </dependencies>
 
 </project>

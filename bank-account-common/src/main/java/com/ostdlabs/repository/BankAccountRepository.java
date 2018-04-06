@@ -1,9 +1,10 @@
 package com.ostdlabs.repository;
 
 import com.ostdlabs.model.BankAccount;
+import org.springframework.data.repository.CrudRepository;
+import org.springframework.stereotype.Repository;
 
-import java.util.List;
+@Repository
+public interface BankAccountRepository extends CrudRepository<BankAccount, Long> {
 
-public interface BankAccountRepository {
-    List<BankAccount> findAll();
 }
