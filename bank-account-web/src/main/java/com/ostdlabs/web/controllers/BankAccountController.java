@@ -2,6 +2,8 @@ package com.ostdlabs.web.controllers;
 
 import com.ostdlabs.model.BankAccount;
 import com.ostdlabs.services.BankAccountService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -15,6 +17,8 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/account")
 public class BankAccountController {
+    private static final Logger LOGGER = LoggerFactory.getLogger(BankAccountController.class);
+
     private final BankAccountService bankAccountService;
 
     @Autowired
@@ -30,11 +34,13 @@ public class BankAccountController {
 
     @RequestMapping(value = "/add", method = RequestMethod.POST)
     public BankAccount add(@RequestBody BankAccount bankAccount) {
+        LOGGER.info("Adding new bank account");
         return bankAccountService.add(bankAccount);
     }
 
     @RequestMapping(value = "/delete/{id}", method = RequestMethod.POST)
     public boolean delete(@PathVariable Long id) {
+        LOGGER.info("Deleting bank account. Id: {}", id);
         return bankAccountService.delete(id);
     }
 
