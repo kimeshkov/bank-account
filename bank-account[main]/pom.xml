@@ -17,6 +17,21 @@
             <groupId>com.ostdlabs</groupId>
             <artifactId>bank-account-common</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.ostdlabs</groupId>
+            <artifactId>bank-account-web</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.h2database</groupId>
+            <artifactId>h2</artifactId>
+        </dependency>
+
+        <!-- Test-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
 
 </project>

@@ -20,6 +20,7 @@
         <module>bank-account[main]</module>
         <module>bank-account-model</module>
         <module>bank-account-common</module>
+        <module>bank-account-web</module>
     </modules>
 
     <dependencyManagement>
@@ -34,15 +35,12 @@
                 <artifactId>bank-account-common</artifactId>
                 <version>${project.version}</version>
             </dependency>
+            <dependency>
+                <groupId>com.ostdlabs</groupId>
+                <artifactId>bank-account-web</artifactId>
+                <version>${project.version}</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
-
-    <dependencies>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-data-jpa</artifactId>
-        </dependency>
-    </dependencies>
-
 
 </project>

@@ -52,7 +52,6 @@ public class BankAccountRepositoryTest {
         //assert
         Iterable<BankAccount> result = bankAccountRepository.findAll();
 
-
         assertThat(result,
                 containsInAnyOrder(
                         hasProperty("accountNumber", is("accountNumber")),
