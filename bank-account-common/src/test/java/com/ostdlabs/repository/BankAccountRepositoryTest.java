@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.util.stream.StreamSupport;
+
 import static org.hamcrest.Matchers.contains;
 import static org.hamcrest.Matchers.containsInAnyOrder;
 import static org.hamcrest.Matchers.hasProperty;
@@ -67,7 +69,7 @@ public class BankAccountRepositoryTest {
         BankAccount newAccount = new BankAccount();
         newAccount.setAccountNumber("accountNumber");
 
-        BankAccount savedAccount  = bankAccountRepository.save(newAccount);
+        BankAccount savedAccount = bankAccountRepository.save(newAccount);
 
 
         savedAccount.setAccountNumber("accountNumber_2");
@@ -82,6 +84,39 @@ public class BankAccountRepositoryTest {
         assertThat(result,
                 contains(
                         hasProperty("accountNumber", is("accountNumber_2"))
+                )
+        );
+
+    }
+
+    @Test
+    public void shouldDeleteBankAccount() throws Exception {
+        //arrange
+        BankAccount newAccount = new BankAccount();
+        newAccount.setAccountNumber("accountNumber");
+
+        bankAccountRepository.save(newAccount);
+
+        BankAccount newAccount_2 = new BankAccount();
+        newAccount_2.setAccountNumber("accountNumber_2");
+
+        bankAccountRepository.save(newAccount_2);
+
+        Iterable<BankAccount> foundAccounts = bankAccountRepository.findAll();
+        BankAccount accountForDeletion = StreamSupport.stream(foundAccounts.spliterator(), false)
+                .filter(a -> "accountNumber_2".equals(a.getAccountNumber()))
+                .findFirst()
+                .get();
+
+        //act
+        bankAccountRepository.delete(accountForDeletion);
+
+        //assert
+        Iterable<BankAccount> result = bankAccountRepository.findAll();
+
+        assertThat(result,
+                contains(
+                        hasProperty("accountNumber", is("accountNumber"))
                 )
         );
 
