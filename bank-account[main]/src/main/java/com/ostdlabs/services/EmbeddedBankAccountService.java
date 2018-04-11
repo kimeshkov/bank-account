@@ -1,8 +1,10 @@
 package com.ostdlabs.services;
 
+import com.ostdlabs.exceptions.AccountNotFoundByIdException;
 import com.ostdlabs.model.BankAccount;
 import com.ostdlabs.repositories.BankAccountRepository;
-import org.springframework.beans.BeanUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,9 +13,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import static org.springframework.beans.BeanUtils.copyProperties;
+
 @Service
 @Transactional
 public class EmbeddedBankAccountService implements BankAccountService {
+    private static final Logger LOGGER = LoggerFactory.getLogger(EmbeddedBankAccountService.class);
 
     private final BankAccountRepository bankAccountRepository;
 
@@ -36,7 +41,22 @@ public class EmbeddedBankAccountService implements BankAccountService {
 
     @Override
     public BankAccount add(BankAccount bankAccount) {
-        return bankAccountRepository.save(copyFrom(bankAccount));
+        return bankAccountRepository.save(copyWithoutId(bankAccount));
+    }
+
+    @Override
+    public BankAccount update(BankAccount bankAccount) {
+        Optional<BankAccount> existedAccount = bankAccountRepository.findById(bankAccount.getId());
+
+        if (!existedAccount.isPresent()) {
+            LOGGER.error("Account not found by id:{}", bankAccount.getId());
+            throw new AccountNotFoundByIdException();
+        }
+
+        BankAccount target = existedAccount.get();
+        copyProperties(bankAccount, target);
+        return bankAccountRepository.save(target);
+
     }
 
     @Override
@@ -49,9 +69,9 @@ public class EmbeddedBankAccountService implements BankAccountService {
         return false;
     }
 
-    private BankAccount copyFrom(BankAccount source) {
+    private BankAccount copyWithoutId(BankAccount source) {
         BankAccount newAccount = new BankAccount();
-        BeanUtils.copyProperties(source, newAccount, "id");
+        copyProperties(source, newAccount, "id");
         return newAccount;
     }
 }
