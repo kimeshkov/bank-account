@@ -1,4 +1,4 @@
-package om.ostdlabs.web.controller;
+package com.ostdlabs.web.controller;
 
 import com.ostdlabs.model.BankAccount;
 import com.ostdlabs.service.BankAccountService;
