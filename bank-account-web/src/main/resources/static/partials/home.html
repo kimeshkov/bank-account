@@ -1,0 +1,36 @@
+<table class="table">
+    <thead class="thead-dark">
+    <tr>
+        <th scope="col">#</th>
+        <th scope="col">Account number</th>
+        <th scope="col">IBAN</th>
+        <th scope="col">Bank name</th>
+        <th scope="col">Bic</th>
+        <th scope="col"></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr ng-repeat="account in accounts track by $index">
+        <th scope="row">{{$index + 1}}</th>
+        <td>{{account.accountNumber}}</td>
+        <td>{{account.iban}}</td>
+        <td>{{account.bankName}}</td>
+        <td>{{account.bic}}</td>
+        <td>
+            <button ng-click="delete($index, account)" type="button" class="btn btn-outline-dark">Delete</button>
+        </td>
+    </tr>
+
+    <tr>
+        <th scope="row"></th>
+        <td> <input ng-model="newAccount.accountNumber" type="text" class="form-control"></td>
+        <td> <input ng-model="newAccount.iban" type="text" class="form-control"></td>
+        <td> <input ng-model="newAccount.bankName" type="text" class="form-control"></td>
+        <td> <input ng-model="newAccount.bic" type="text" class="form-control"></td>
+        <td>
+            <button ng-click="add()" type="button" class="btn btn-outline-success">Add</button>
+        </td>
+    </tr>
+
+    </tbody>
+</table>

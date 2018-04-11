@@ -1,4 +1,4 @@
-package com.ostdlabs.repository;
+package com.ostdlabs.repositories;
 
 
 import org.springframework.boot.autoconfigure.SpringBootApplication;

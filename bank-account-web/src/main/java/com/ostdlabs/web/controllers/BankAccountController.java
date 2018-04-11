@@ -1,8 +1,10 @@
-package com.ostdlabs.web.controller;
+package com.ostdlabs.web.controllers;
 
 import com.ostdlabs.model.BankAccount;
-import com.ostdlabs.service.BankAccountService;
+import com.ostdlabs.services.BankAccountService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -24,6 +26,16 @@ public class BankAccountController {
     @ResponseBody
     public List<BankAccount> findAll() {
         return bankAccountService.findAll();
+    }
+
+    @RequestMapping(value = "/add", method = RequestMethod.POST)
+    public BankAccount add(@RequestBody BankAccount bankAccount) {
+        return bankAccountService.add(bankAccount);
+    }
+
+    @RequestMapping(value = "/delete/{id}", method = RequestMethod.POST)
+    public boolean delete(@PathVariable Long id) {
+        return bankAccountService.delete(id);
     }
 
 }

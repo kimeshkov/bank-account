@@ -1,7 +1,7 @@
-package com.ostdlabs.service;
+package com.ostdlabs.services;
 
 import com.ostdlabs.model.BankAccount;
-import com.ostdlabs.repository.BankAccountRepository;
+import com.ostdlabs.repositories.BankAccountRepository;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

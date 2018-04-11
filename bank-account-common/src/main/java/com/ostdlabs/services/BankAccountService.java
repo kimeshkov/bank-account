@@ -1,4 +1,4 @@
-package com.ostdlabs.service;
+package com.ostdlabs.services;
 
 import com.ostdlabs.model.BankAccount;
 

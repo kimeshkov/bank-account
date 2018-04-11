@@ -1,4 +1,4 @@
-package com.ostdlabs.repository;
+package com.ostdlabs.repositories;
 
 import com.ostdlabs.model.BankAccount;
 import org.junit.Test;
