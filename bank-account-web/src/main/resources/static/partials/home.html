@@ -5,7 +5,7 @@
         <th scope="col">Account number</th>
         <th scope="col">IBAN</th>
         <th scope="col">Bank name</th>
-        <th scope="col">Bic</th>
+        <th scope="col">BIC</th>
         <th scope="col"></th>
     </tr>
     </thead>
@@ -17,16 +17,22 @@
         <td>{{account.bankName}}</td>
         <td>{{account.bic}}</td>
         <td>
+            <button ng-click="edit($index, account)"
+                    data-toggle="modal"
+                    data-target="#editModal"
+                    type="button"
+                    class="btn btn-outline-primary"> Edit
+            </button>
             <button ng-click="delete($index, account)" type="button" class="btn btn-outline-dark">Delete</button>
         </td>
     </tr>
 
     <tr>
         <th scope="row"></th>
-        <td> <input ng-model="newAccount.accountNumber" type="text" class="form-control"></td>
-        <td> <input ng-model="newAccount.iban" type="text" class="form-control"></td>
-        <td> <input ng-model="newAccount.bankName" type="text" class="form-control"></td>
-        <td> <input ng-model="newAccount.bic" type="text" class="form-control"></td>
+        <td><input ng-model="newAccount.accountNumber" type="text" class="form-control"></td>
+        <td><input ng-model="newAccount.iban" type="text" class="form-control"></td>
+        <td><input ng-model="newAccount.bankName" type="text" class="form-control"></td>
+        <td><input ng-model="newAccount.bic" type="text" class="form-control"></td>
         <td>
             <button ng-click="add()" type="button" class="btn btn-outline-success">Add</button>
         </td>
@@ -34,3 +40,35 @@
 
     </tbody>
 </table>
+
+<div class="modal fade" id="editModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <form>
+                    <div class="form-group">
+                        <label for="editAccountNumber">Account Number</label>
+                        <input ng-model="editAccount.accountNumber" id="editAccountNumber" type="text"
+                               class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="editIban">IBAN</label>
+                        <input ng-model="editAccount.iban" id="editIban" type="text" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="editBankName">Bank name {{$scope.editAccount.bankName}}</label>
+                        <input ng-model="editAccount.bankName" id="editBankName" type="text" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="editBic">BIC</label>
+                        <input ng-model="editAccount.bic" id="editBic" type="text" class="form-control">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button ng-click="applyEdit()" type="button" class="btn btn-primary" data-dismiss="modal">Apply</button>
+            </div>
+        </div>
+    </div>
+</div>

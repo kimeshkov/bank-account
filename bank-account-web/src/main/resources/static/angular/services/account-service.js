@@ -35,6 +35,23 @@ angular.module('mainModule')
             });
         };
 
+        service.editAccount = function (account, callback) {
+            var req = {
+                method: 'POST',
+                url: contextPath + 'api/account/edit',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                data: account
+            };
+
+            $http(req).then(function (resp) {
+                callback(true, resp.data)
+            }, function () {
+                callback(false)
+            });
+        };
+
         service.delete = function (id, callback) {
             var req = {
                 method: 'POST',
@@ -47,6 +64,8 @@ angular.module('mainModule')
                 callback(false)
             });
         };
+
+        service.testFunc = function(){};
 
     });
 

@@ -14,6 +14,20 @@ angular.module('mainModule')
             });
         };
 
+
+        $scope.edit = function (index, account) {
+            $scope.editAccountIndex = index;
+            $scope.editAccount = angular.copy(account);
+        };
+
+        $scope.applyEdit = function () {
+            AccountService.editAccount($scope.editAccount, function (isSuccess, account) {
+                if (isSuccess) {
+                    $scope.accounts.splice($scope.editAccountIndex , 1, account)
+                }
+            });
+        };
+
         $scope.delete = function (index, account) {
             AccountService.delete(account.id, function (isSuccess, isDeleted) {
                 if (isSuccess && isDeleted) {

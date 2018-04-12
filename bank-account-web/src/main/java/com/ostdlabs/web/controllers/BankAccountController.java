@@ -38,10 +38,19 @@ public class BankAccountController {
         return bankAccountService.add(bankAccount);
     }
 
+    @RequestMapping(value = "/edit", method = RequestMethod.POST)
+    public BankAccount edit(@RequestBody BankAccount bankAccount) {
+        LOGGER.info("Edit bank account. Id: {}", bankAccount.getId());
+        return bankAccountService.update(bankAccount);
+    }
+
+
     @RequestMapping(value = "/delete/{id}", method = RequestMethod.POST)
     public boolean delete(@PathVariable Long id) {
         LOGGER.info("Deleting bank account. Id: {}", id);
         return bankAccountService.delete(id);
     }
+
+
 
 }
